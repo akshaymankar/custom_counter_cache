@@ -5,6 +5,7 @@ module CustomCounterCache::Model
 
   module ClassMethods
     def define_counter_cache(cache_column, &block)
+      return unless connected?
       return unless table_exists?
 
       # counter accessors
@@ -42,6 +43,7 @@ module CustomCounterCache::Model
     end
 
     def update_counter_cache(association, cache_column, options = {})
+      return unless connected?
       return unless table_exists?
 
       association  = association.to_sym
